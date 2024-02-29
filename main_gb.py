@@ -3,6 +3,11 @@ import pandas as pd
 import altair as alt
 import numpy as np
 
+st.set_page_config(
+    page_title="Green Economy Dashboard",
+    page_icon="🌿"
+)
+
 df = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vQeaKeMlun5oXjzClHc7QFeWEJlIS8r7JAp8dReouB3YDKdM3PHiRl-3VDwqlmLFuY9bKFAvNLl47mI/pub?gid=1600829116&single=true&output=csv')
 
 with st.sidebar:
