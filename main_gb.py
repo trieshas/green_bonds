@@ -91,11 +91,11 @@ with st.expander("**💰 About Green Bonds**"):
     
     """)
 
-# Extract the columns you want to keep (Country, and the columns to be melted)
+# Extract the columns to keep
 columns_to_keep = ['Country', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022']
 df_subset_col = df_subset[columns_to_keep]
 
-# Melt the DataFrame to long format
+# Melt to long format
 df_melted = df_subset_col.melt(id_vars='Country', var_name='Year', value_name='Value')
 
 # Group by Year and calculate the sum
@@ -114,12 +114,12 @@ chart_sum = alt.Chart(df_sum).mark_bar(color='green').encode(
 st.altair_chart(chart_sum, use_container_width=True)
 
 st.markdown("""
-         * The overall trend of green bonds seems to head towards an incline,
-         as shown by the annual green bonds issuance bar chart above.
+         * The overall trend of green bonds seems to head towards an increase,
+         as shown by the annual green bond issuance bar chart above.
          * According to latest available data, we can observe that current's maximum participation
          seems to peak at year 2021.
          * Although the cause behind this spike should be investigated further,
-         it is safe to assume that this phenomenon happen because many countries are opting for financing sustainable projects after the COVID-19 hit.
+         it is safe to assume that this phenomenon happened because many countries are opting to finance sustainable projects after the COVID-19 outbreak.
          * There seems to be a decline in the next year (2022), presumably because of the Russian invasion of Ukraine that took place in February, affecting the world's overall economy.""")
 
 df_categories = df.iloc[107:114]
@@ -128,9 +128,6 @@ st.subheader("📑 Type of Issuer")
 # selected_year = st.selectbox('Select Year', ['2018', '2019', '2020'])
 # Slider for year selection
 selected_year = st.select_slider('Select Year', ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
-
-# fig_pie = px.pie(df_categories, names='Type_of_Issuer', values=selected_year,
-#              title=f'Pie Chart for {selected_year}')
 
 fig_pie = alt.Chart(df_categories).mark_arc().encode(
     alt.Color('Type_of_Issuer:N', legend=alt.Legend(title='Type of Issuer')),
@@ -171,8 +168,8 @@ with tab2:
     st.altair_chart(pie_chart, use_container_width=True)
 
 st.markdown("""
-* Aligned with the values growth, the type of issuer involved in green bonds also grow over time, as seen by more diverse participation.
-* In year 2022, besides other financial corporations, we could observe that local and state government issue more green bonds than other organizations.
+* Aligned with the issuance amount growth, the type of issuer involved in green bonds also grows over time, as seen by more diverse participation.
+* In 2022, besides other financial corporations, we could observe that local and state governments issue more green bonds than other organizations.
 """)
 
 st.subheader("🌐 Participation by Continent")
@@ -242,17 +239,14 @@ continents = filtered_df['Region'].unique().tolist()
 continents.insert(0, 'All')  # Add an option to select all continents
 selected_continent = st.selectbox('Select a continent', continents)
 
-# Sorting method
-#sort_by = st.checkbox('Ascending')
-
 # Display the horizontal bar chart
 st.subheader(f'📗 Green Bonds Issuance by Country in {year} (Billion US Dollar)' )
 st.write("This horizontal bar chart shows green bond issuances by country grouped by continent.")
 st.altair_chart(create_bar_chart(year, selected_continent), use_container_width=True)
 st.markdown("""
-* Countries from the Europe continent dominates the top 10 spot for green bonds issuance.
-* Next after the European countries are Asian countries with 2 of the 3 countries located in South East Asia.
-* China is the largest green bonds issuer among countries in Asia continent, the only country included in the top 5.
+* Countries from the European continent dominate the top 10 spots for green bond issuance.
+* Next after the European countries are Asian countries, with two of the three countries located in Southeast Asia.
+* China is the largest green bond issuer among countries on the Asian continent, the only country included in the top 5.
             """)
 
 # ENVIRONMENTAL PROTECTION EXPENDITURES
@@ -264,7 +258,6 @@ dfe = pd.read_csv(data_link)
 columns_to_drop = ['ObjectId', 'ISO2', 'ISO3', 'Source', 'CTS Code', 'CTS Name', 'CTS Full Descriptor']
 dfe = dfe.drop(columns=columns_to_drop)
 
-# Multi-select box for selecting countries
 st.header('🌊 Environmental Protection Expenditures')
 st.write('**In Percent of GDP**')
 with st.expander('**💧 About Environmental Protection Expenditures**'):
@@ -275,10 +268,9 @@ with st.expander('**💧 About Environmental Protection Expenditures**'):
 
 selected_country = st.selectbox('Select Country', dfe['Country'].unique())
 
-# Filter dataframe based on selected countries
 filtered_dfe = dfe[dfe['Country'] == selected_country]
 
-# Melt dataframe to long format for Altair
+# Melt dataframe to long format
 melted_dfe = filtered_dfe.melt(id_vars=['Country', 'Indicator', 'Unit'], var_name='Year', value_name='Expenditure')
 melted_dfe = melted_dfe[(melted_dfe['Expenditure'].notnull()) & (melted_dfe['Expenditure'] != 0)]
 
