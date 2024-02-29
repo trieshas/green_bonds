@@ -13,10 +13,10 @@ with st.sidebar:
         st.write("In this dashboard, you can:")
         st.markdown("""
         * expand or hide text
-        * view type of green bonds issuer by year
+        * view green bond issuers by year
         * see type of issuer by percentage or value
         * check out each countries' issued green bonds based on year and continent
-        * select each country's environmental protection expenditures percentage and concern
+        * select each country's environmental protection expenditure percentage and concern
         * multiselect some countries' annual gross domestic product
         """)
     with st.expander("**✨ About This Project**"):
