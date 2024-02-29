@@ -1,4 +1,3 @@
-import plotly.express as px
 import streamlit as st
 import pandas as pd
 import altair as alt
@@ -130,13 +129,23 @@ st.subheader("📑 Type of Issuer")
 # Slider for year selection
 selected_year = st.select_slider('Select Year', ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
 
-fig_pie = px.pie(df_categories, names='Type_of_Issuer', values=selected_year,
-             title=f'Pie Chart for {selected_year}')
+# fig_pie = px.pie(df_categories, names='Type_of_Issuer', values=selected_year,
+#              title=f'Pie Chart for {selected_year}')
+
+fig_pie = alt.Chart(df_categories).mark_arc().encode(
+    alt.Color('Type_of_Issuer:N', legend=alt.Legend(title='Type of Issuer')),
+    tooltip=['Type_of_Issuer', selected_year],
+    theta=selected_year
+).properties(
+    width=400,
+    height=400,
+    title=f'Pie Chart for {selected_year}'
+)
 
 tab1, tab2 = st.tabs(["🟢 Percentage Comparison", "🟢 Value Comparison"])
 
 with tab1:
-    st.plotly_chart(fig_pie, use_container_width=True)
+    st.altair_chart(fig_pie, use_container_width=True)
 
 # Melt the DataFrame to long format
 df_melted = df_categories.melt(id_vars='Type_of_Issuer', var_name='Year', value_name='Value')
@@ -322,103 +331,3 @@ chart_gdp = alt.Chart(melted_df_gdp).mark_line().encode(
 
 # Display chart
 st.altair_chart(chart_gdp, use_container_width=True)
-
-# txt, cha = st.columns([1,9])
-# with txt:
-#     st.write('something')
-# with cha:
-#     st.altair_chart(charte, use_container_width=True)
-
-# BATAS SUCI
-# data = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTdVY5KdcjHeaYhhpeVVeNnhqI7YVd-UlIs88oWtulNJsnzdtFdpZQuN32zW_4fxtLRbTUpS7qaf5JZ/pub?gid=1155855377&single=true&output=csv"
-
-# df = pd.read_csv(data)
-
-# # Melt the DataFrame to long format for Altair
-# df_melted = pd.melt(df, id_vars=['country_name'], value_vars=['amount_exp', 'gdp_min'], var_name='metric', value_name='value')
-
-# # Stacked bar chart for amount_exp and gdp_min
-# bar_chart = alt.Chart(df_melted).mark_bar().encode(
-#     y=alt.Y('country_name:N', title='Country', sort='-x'),
-#     x='value:Q',
-#     color='metric:N',
-#     tooltip=['country_name', 'metric', 'value']
-# ).properties(
-#     width=400,
-#     height=300
-# )
-
-# # Circle chart for sumgb
-# circle_chart = alt.Chart(df).mark_circle().encode(
-#     y=alt.Y('country_name:N', sort = '-x'),
-#     x='sumgb:Q',
-#     size=alt.Size('sumgb:Q', title='sumgb'),
-#     tooltip=['country_name', 'sumgb']
-# ).properties(
-#     width=400,
-#     height=300
-# )
-
-# # Combine the two charts
-# combined_chart = bar_chart + circle_chart
-
-# # Display the combined chart
-# st.altair_chart(bar_chart, use_container_width = True)
-# st.altair_chart(combined_chart, use_container_width = True)
-
-
-# countries = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT5XeSzDT6OHcdJkIp9wGlmCIfrTTBWviZfQS8A--hX2FxHFwM_klzCk94Bbox9z3RUoLfeP9Sh17gP/pub?gid=1596994185&single=true&output=csv'
-# dfc = pd.read_csv(countries)
-
-# # Melt the dataframe to long format for Altair
-# dfc_melted = pd.melt(dfc, id_vars=['country_name', 'indicator', 'unit'], var_name='year', value_name='value')
-
-# # Line Chart: Trend of each indicator over time for each country
-# line_chartt = alt.Chart(dfc_melted).mark_line().encode(
-#     x='year:O',
-#     y='value:Q',
-#     color='indicator:N',
-#     strokeDash='country_name:N',
-#     tooltip=['country_name', 'indicator', 'value']
-# ).properties(
-#     width=600,
-#     height=400
-# ).interactive()
-
-# # Grouped Bar Chart: Comparison of different indicators for each country across years
-# grouped_bar_chartt = alt.Chart(dfc_melted).mark_bar().encode(
-#     x=alt.X('year:N', title='Year'),
-#     y=alt.Y('value:Q', title='Value'),
-#     color='indicator:N',
-#     column='country_name:N',
-#     tooltip=['country_name', 'indicator', 'value']
-# ).properties(
-#     width=100,
-#     height=400
-# ).interactive()
-
-# # Stacked Bar Chart: Composition of each indicator for each country across years
-# stacked_bar_chartt = alt.Chart(dfc_melted).mark_bar().encode(
-#     x=alt.X('year:N', title='Year'),
-#     y=alt.Y('value:Q', title='Value', stack='zero'),
-#     color='indicator:N',
-#     column='country_name:N',
-#     tooltip=['country_name', 'indicator', 'value']
-# ).properties(
-#     width=100,
-#     height=400
-# ).interactive()
-
-# line, group, bar = st.columns(3)
-# # Display the charts
-# with line:
-#     st.altair_chart(line_chartt, use_container_width=True)
-
-# with group:
-#     st.altair_chart(grouped_bar_chartt, use_container_width=True)
-
-# with bar:
-#     st.altair_chart(stacked_bar_chartt, use_container_width=True)
-
-
-
