@@ -131,7 +131,22 @@ st.markdown("""
 df_categories = df.iloc[107:114]
 
 st.subheader("📑 Type of Issuer")
-# selected_year = st.selectbox('Select Year', ['2018', '2019', '2020'])
+with st.expander("**📕 About Issuer**"):
+    st.write("""
+        ### 💷 Issuer
+        In the context of bonds, an issuer refers to the entity that issues the bond and is responsible for making payments to bondholders. The issuer can be a corporation, government entity (such as a national government or local municipality), or other organizations that seek to raise capital by issuing bonds.
+       \n Type of green bond issuer:
+       """)
+    st.markdown("""
+    * Banks
+    * Intenational Organizations
+    * Local and State Government
+    * Nonfinancial Corporations
+    * Other financial corporations
+    * Sovereign
+    * State owned entities
+    """)
+
 # Slider for year selection
 selected_year = st.select_slider('Select Year', ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
 
@@ -265,7 +280,18 @@ st.header('🌊 Environmental Protection Expenditures')
 st.write('**In Percent of GDP**')
 with st.expander('**💧 About Environmental Protection Expenditures**'):
     st.write("""
+    ### 🧊 Environmental Protection Expenditures
     Environmental protection expenditure refers to the money spent by governments, businesses, or individuals on activities, projects, and initiatives aimed at preserving, conserving, and enhancing the environment. These expenditures are directed towards measures that mitigate environmental degradation, promote sustainability, and address environmental challenges such as pollution, habitat destruction, and climate change.
+    \n Indicator by the IMF:
+    """)
+    st.markdown("""
+    1. Expenditure on biodiversity & landscape protection
+    2. Expenditure on environment protection
+    3. Expenditure on environment protection R&D
+    4. Expenditure on environment protection not elsewhere classified (n.e.c)
+    5. Expenditure on pollution abatement
+    6. Expenditure on waste management
+    7. Expenditure on waste water management
     """)
 
 selected_country = st.selectbox('Select Country', dfe['Country'].unique())
@@ -296,7 +322,7 @@ st.write('**GDP (current US$)**')
 
 with st.expander("**📈 About Gross Domestic Product (GDP)**"):
     st.write("""
-        ### Gross Domestic Product (GDP)
+        ### 💵 Gross Domestic Product (GDP)
         
         Gross Domestic Product (GDP) is a key indicator of a country's economic performance. It represents the total monetary value of all goods and services produced within a country's borders over a specific period, typically a year or a quarter. GDP is often used as a measure of the size and health of an economy.
         
