@@ -18,10 +18,11 @@ with st.sidebar:
         st.write("In this dashboard, you can:")
         st.markdown("""
         * expand or hide text
+        * observe the trend of green bonds issuance
         * view green bond issuers by year
         * see type of issuer by percentage or value
-        * check out each countries' issued green bonds based on year and continent
-        * select each country's environmental protection expenditure percentage and concern
+        * check out each countries' issued green bonds based on year and region
+        * take a look at each country's environmental protection expenditure percentage and concern
         * multiselect some countries' annual gross domestic product
         """)
     with st.expander("**✨ About This Project**"):
@@ -177,7 +178,7 @@ st.markdown("""
 * In 2022, besides other financial corporations, we could observe that local and state governments issue more green bonds than other organizations.
 """)
 
-st.subheader("🌐 Participation by Continent")
+st.subheader("🌐 Participation by Region")
 africa, asia, europe, north, oceania, south = st.columns(6)
 
 with africa:
@@ -232,9 +233,6 @@ def create_bar_chart(year, continent):
 
     return chart
 
-# st.subheader('Green Bond Issuances by Country')
-# st.write("This dashboard visualizes green bond issuances by country grouped by continent using Altair.")
-
 # Year slider
 year = st.slider('Select a year', min_value=2012, max_value=2022, value=2022, step=1)
 
@@ -242,7 +240,7 @@ year = st.slider('Select a year', min_value=2012, max_value=2022, value=2022, st
 filtered_df = df.dropna(subset=['Region'])
 continents = filtered_df['Region'].unique().tolist()
 continents.insert(0, 'All')  # Add an option to select all continents
-selected_continent = st.selectbox('Select a continent', continents)
+selected_continent = st.selectbox('Select a region', continents)
 
 # Display the horizontal bar chart
 st.subheader(f'📗 Green Bonds Issuance by Country in {year} (Billion US Dollar)' )
@@ -267,8 +265,7 @@ st.header('🌊 Environmental Protection Expenditures')
 st.write('**In Percent of GDP**')
 with st.expander('**💧 About Environmental Protection Expenditures**'):
     st.write("""
-    **According to the International Monetary Fund (IMF):**
-    \n Government expenditures on a specified set of activities including pollution abatement, protection of biodiversity landscape, waste and wastewater management, within the framework of the Classification of Functions of Government (COFOG).
+    Environmental protection expenditure refers to the money spent by governments, businesses, or individuals on activities, projects, and initiatives aimed at preserving, conserving, and enhancing the environment. These expenditures are directed towards measures that mitigate environmental degradation, promote sustainability, and address environmental challenges such as pollution, habitat destruction, and climate change.
     """)
 
 selected_country = st.selectbox('Select Country', dfe['Country'].unique())
