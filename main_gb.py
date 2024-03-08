@@ -134,9 +134,11 @@ st.subheader("📑 Type of Issuer")
 with st.expander("**📕 About Issuer**"):
     st.write("""
         ### 💷 Issuer
-        In the context of bonds, an issuer refers to the entity that issues the bond and is responsible for making payments to bondholders. The issuer can be a corporation, government entity (such as a national government or local municipality), or other organizations that seek to raise capital by issuing bonds.
-       \n Type of green bond issuer:
+        In the context of bonds, an issuer refers to the entity that issues the bond and is responsible
+        for making payments to bondholders. The issuer can be a corporation, government entity 
+        (such as a national government or local municipality), or other organizations that seek to raise capital by issuing bonds.
        """)
+    st.write("Type of green bond issuer:")
     st.markdown("""
     * Banks
     * Intenational Organizations
