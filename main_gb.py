@@ -727,3 +727,17 @@ with st.expander('**💙 Analysis**'):
     * Developed countries tend to be able to budget more for the enviromental protection expenditure, for example France which budgets 1-2% of GDP, Japan that budgets 1-2.8% of GDP, Netherlands that budgets 1-2.5% of GDP, etc.
     * This may be because developing countries have other urgent economic priorities, such as eradicating poverty, industrialization and economic diversification, infrastructure development, and more.            
     """)
+
+st.subheader("✅ Conclusion")
+st.markdown("""
+    There's currently growing interest in sustainable finance, particularly green bonds. This interest can be seen from the increasing trend of total green bonds issuance and diversification of issuers. This trend is a positive outlook towards not only green finance, but also green economy.
+    """)
+
+st.subheader("🌅 Recommendation")
+st.markdown("""
+    1. Promote awareness and education
+    2. Enhance reporting and transparency
+    3. Incentivize green investments
+    4. Strengthen collaboration
+    5. Support innovation and research
+    """)
